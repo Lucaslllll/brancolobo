@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+
+{% block conteudo %}
+<form action="{% url 'edit_page' %}" method="post">
+  <input type="text" class="form-control" name="ask">
+  <input type="textarea" class="form-control" name="response">
+  <input type="text" class="form-control" name="name_client">
+  <input type="textarea" class="form-controlm" name="details_client">
+  <input type="submit" class="btn btn-primary" value="Enviar">
+</form>
+{% endblock %}

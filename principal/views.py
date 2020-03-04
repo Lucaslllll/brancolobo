@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 
-@login_required(login_url='/login')
+@login_required(login_url='login')
 def index(request):
 	return render(request, 'dashboard/dashboard.html')
 
@@ -38,3 +38,6 @@ def do_login(request):
 
 def forget_password(request):
 	pass
+
+def edit_page(request):
+  return render(request, 'dashboard/edit-page.html')

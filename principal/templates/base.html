@@ -46,11 +46,19 @@ The above copyright notice and this permission notice shall be included in all c
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active  ">
-            <a class="nav-link" href="./dashboard.html">
+            <a class="nav-link" href="{% url 'index' %}">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'edit_page' %}">
+              <!-- logo muda de acordo com o nome ex: edit fica um lápis -->
+              <i class="material-icons">edit</i>
+              <p>Editar Page </p>
+            </a>
+          </li>
+          <!-- 
           <li class="nav-item ">
             <a class="nav-link" href="./user.html">
               <i class="material-icons">person</i>
@@ -98,7 +106,7 @@ The above copyright notice and this permission notice shall be included in all c
               <i class="material-icons">unarchive</i>
               <p>Upgrade to PRO</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
