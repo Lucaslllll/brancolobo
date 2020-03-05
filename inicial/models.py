@@ -13,3 +13,10 @@ class Doubt(models.Model):
 class Description(models.Model):
 	title = models.CharField(max_length=255)
 	details = models.TextField()
+
+class PhotoProdutoAfterBefore(models.Model):
+	name = models.CharField(max_length=255)
+	photo = models.ImageField()
+
+	def __str__(self):
+		return self.name
