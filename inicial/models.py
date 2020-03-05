@@ -1,7 +1,15 @@
 from django.db import models
 
-class Information_Page(models.Model):
+
+class Client(models.Model):
+	name = models.CharField(max_length=255)
+	details = models.TextField()
+
+class Doubt(models.Model):
 	ask = models.CharField(max_length=255)
 	response = models.TextField()
-	name_client = models.CharField(max_length=255)
-	details_client = models.TextField()
+	
+
+class Description(models.Model):
+	title = models.CharField(max_length=255)
+	details = models.TextField()

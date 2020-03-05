@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="content">
+	<div class="row">
+		{% for doubt in doubts %}
+		<div class="col-8">
+			<ul>
+				<li>{{doubt.ask}}</li>
+				<li>{{doubt.response}}</li>
+			</ul>
+			<a href="{% url 'edit_doubt' doubt.pk %}" class="btn btn-primary">EDITAR</a>
+			<a href="{% url 'delete_doubt' doubt.pk %}" class="btn btn-danger">APAGAR</a>
+		</div>
+		{% endfor %}
+	</div>
+</div>	
+{% endblock %}

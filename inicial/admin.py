@@ -1,5 +1,6 @@
 from django.contrib import admin
 
-from .models import Information_Page
+from .models import Doubt, Client
 
-admin.site.register(Information_Page)
+admin.site.register(Doubt)
+admin.site.register(Client)

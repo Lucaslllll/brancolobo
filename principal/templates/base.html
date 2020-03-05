@@ -51,13 +51,41 @@ The above copyright notice and this permission notice shall be included in all c
               <p>Dashboard</p>
             </a>
           </li>
+          
+          <br>
+
           <li class="nav-item active  ">
-            <a class="nav-link" href="{% url 'edit_page' %}">
+            <a class="nav-link" href="{% url 'add_doubt' %}">
               <!-- logo muda de acordo com o nome ex: edit fica um lápis -->
-              <i class="material-icons">edit</i>
-              <p>Editar Page </p>
+              <i class="material-icons">add</i>
+              <p>Adicionar perguntas</p>
             </a>
           </li>
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'list_doubt' %}">
+              <!-- logo muda de acordo com o nome ex: edit fica um lápis -->
+              <i class="material-icons">list</i>
+              <p>Listar Perguntas</p>
+            </a>
+          </li>
+          
+          <br>
+
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'add_client' %}">
+              <!-- logo muda de acordo com o nome ex: edit fica um lápis -->
+              <i class="material-icons">add</i>
+              <p>Adicionar Comentários</p>
+            </a>
+          </li>
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'list_client' %}">
+              <!-- logo muda de acordo com o nome ex: edit fica um lápis -->
+              <i class="material-icons">list</i>
+              <p>Listar Comentários</p>
+            </a>
+          </li>
+
           <!-- 
           <li class="nav-item ">
             <a class="nav-link" href="./user.html">
