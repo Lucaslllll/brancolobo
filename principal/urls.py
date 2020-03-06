@@ -15,6 +15,11 @@ urlpatterns = [
    path('list_client', views.list_client, name="list_client"),
    path('delete_client/<int:pk>', views.delete_client, name="delete_client"),
    
+   path('add_product', views.add_product, name="add_product"),
+   path('edit_product/<int:pk>', views.edit_product, name="edit_product"),
+   path('list_product', views.list_product, name="list_product"),
+   path('delete_product/<int:pk>', views.delete_product, name="delete_product"),
+
    path('login', views.do_login, name="login"),
    path('forget_password', views.forget_password, name='forget_password'),
    

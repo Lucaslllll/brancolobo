@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="content">
+	<div class="row">
+		{% for product in products %}
+		<div class="col-8">
+			<ul>
+				<li>{{product.name}}</li>
+				<li>{{product.details}}</li>
+			</ul>
+			<a href="{% url 'edit_product' product.pk %}" class="btn btn-primary">EDITAR</a>
+			<a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">APAGAR</a>
+		</div>
+		{% endfor %}
+	</div>
+</div>	
+{% endblock %}

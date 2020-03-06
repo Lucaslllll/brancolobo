@@ -198,27 +198,17 @@
               necessitatibus dolor dolore.</p>
           </div>
         </div>
+
+        {% for product in products %}
         <div class="col-12 mt-1">
           <div class="ingrediente-self">
-            <img src="{% static 'img/carvao_ativado.png' %}" />
-            <h4>Carvão ativado</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus libero aspernatur facere ipsam qui. Ad et quae, libero aperiam dolores obcaecati. Dolor inventore modi eligendi iste magni nulla minus porro.</p>
+            <img src="{{product.image.url}}" />
+            <h4>{{product.name}}</h4>
+            <p>{{product.details}}</p>
           </div>
         </div>
-        <div class="col-12 mt-1">
-          <div class="ingrediente-self">
-            <img src="{% static 'img/argila_kaolin.png' %}" />
-            <h4>Argila Kaolin</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati est magni, blanditiis reprehenderit molestias molestiae eos doloremque officia nostrum ratione necessitatibus ipsam sequi sed labore et autem laboriosam quasi voluptatibus.</p>
-          </div>
-        </div>
-        <div class="col-12 mt-1">
-          <div class="ingrediente-self">
-            <img src="{% static 'img/oleo_essencial.png' %}" />
-            <h4>Óleo essencial de Laranja</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, maiores. Vero porro dignissimos quo. Corporis, incidunt sapiente. Dolore et aliquam, iure placeat quasi maiores at, ea impedit rerum, sit repellendus.</p>
-          </div>
-        </div>
+        {% endfor %}
+        
       </div>
     </div>
   </div>

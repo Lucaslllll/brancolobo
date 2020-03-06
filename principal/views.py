@@ -6,7 +6,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 
 from inicial.models import Doubt, Client
-from .forms import DoubtForm, ClientForm
+from .models import Product
+from .forms import DoubtForm, ClientForm, ProductForm
+
+import json
 
 @login_required(login_url='login')
 def index(request):
@@ -101,7 +104,7 @@ def add_client(request):
       form.save()
       return redirect('list_client')
     else:
-      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_doubt'>click here</a>")
+      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_client'>click here</a>")
   else:
     form = ClientForm()
   data['form'] = form
@@ -126,7 +129,7 @@ def edit_client(request, pk):
       return redirect('index')
     else:
       
-      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_doubt'>click here</a>")
+      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_client'>click here</a>")
   else:
     form = ClientForm(instance=client)
 
@@ -137,4 +140,53 @@ def edit_client(request, pk):
 def delete_client(request, pk):
   client = Client.objects.get(pk=pk)
   client.delete()
+  return redirect('index')
+
+
+# crud client
+
+def add_product(request):
+  data = {}
+  if request.method == 'POST':
+    form = ProductForm(data=request.POST, files=request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('list_product')
+    else:
+      HttpResponse(json.dumps(form.errors))
+  else:
+    form = ProductForm()
+  data['form'] = form
+
+  return render(request, 'dashboard/product/add-product.html', data)
+
+def list_product(request):
+  data = {}
+  products = Product.objects.all()
+  data['products'] = products
+  return render(request, 'dashboard/product/list-product.html', data)
+
+def edit_product(request, pk):
+  data = {}
+  product = Product.objects.get(pk=pk)
+  
+  if request.method == 'POST':
+    product.image.delete()
+    form = ProductForm(data=request.POST, files=request.FILES, instance=product)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+    else:
+      
+      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_doubt'>click here</a>")
+  else:
+    form = ProductForm(instance=product)
+
+  data['form'] = form; data['product'] = product;
+
+  return render(request, 'dashboard/product/edit-product.html', data)
+
+def delete_product(request, pk):
+  product = Product.objects.get(pk=pk)
+  product.delete()
   return redirect('index')
