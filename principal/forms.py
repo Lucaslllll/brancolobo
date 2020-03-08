@@ -1,6 +1,7 @@
 from django import forms
-from inicial.models import Doubt, Client
-from .models import Product
+from inicial.models import Doubt, Client, PhotoProdutoAfterBefore
+from .models import Product, Ingredients, Contact, Initial, How_Use, How_Use_Text, Video_Description
+
 
 class DoubtForm(forms.ModelForm):
   class Meta:
@@ -43,3 +44,65 @@ class ProductForm(forms.ModelForm):
     labels = {'name': "Nome", 'price': "Preço", 'ingredients': "Ingredientes",
     		  'image': "Imagem", 'details': "Detalhes",
     }
+
+class IngredientsForm(forms.ModelForm):
+  class Meta:
+    model = Ingredients
+    fields = '__all__'
+    widgets = {
+      'name': forms.TextInput(attrs={'class':'form-control', }),
+      }
+    labels = {'name': "Nome",}
+
+class CaseForm(forms.ModelForm):
+  class Meta:
+    model = PhotoProdutoAfterBefore
+    fields = '__all__'
+    widgets = {
+      'name': forms.TextInput(attrs={'class':'form-control', }),
+      'photo': forms.FileInput(attrs={'class':'form-control'})
+      }
+    labels = {'name': "Nome", 'photo': "Foto"}
+
+class InitialForm(forms.ModelForm):
+  class Meta:
+    model = Initial
+    fields = '__all__'
+    widgets = {
+      'title': forms.Textarea(attrs={'class':'form-control', }),
+      'subtitle': forms.Textarea(attrs={'class':'form-control'})
+      }
+    labels = {'title': "Título", 'subtitle': "Subtítulo"}
+
+class HowUseForm(forms.ModelForm):
+  class Meta:
+    model = How_Use
+    fields = '__all__'
+    widgets = {
+      'title': forms.TextInput(attrs={'class':'form-control'}),
+      'details': forms.Textarea(attrs={'class':'form-control'}),
+      'image': forms.FileInput(attrs={'class': 'form-control'}), 
+      }
+    labels = {'title': "Título", 'details': "Detalhes", 'image': "Imagem" }
+
+class HowUseTextForm(forms.ModelForm):
+  class Meta:
+    model = How_Use_Text
+    fields = '__all__'
+    widgets = {
+      'title': forms.TextInput(attrs={'class':'form-control'}),
+      'subtitle': forms.TextInput(attrs={'class':'form-control'}),
+      'details': forms.Textarea(attrs={'class': 'form-control'}), 
+      }
+    labels = {'title': "Título", 'details': "Detalhes", 'subtitle': "Subtítulo" }
+
+class VideoDescriptionForm(forms.ModelForm):
+  class Meta:
+    model = Video_Description
+    fields = '__all__'
+    widgets = {
+      'title': forms.TextInput(attrs={'class':'form-control'}),
+      'details': forms.Textarea(attrs={'class':'form-control'}),
+      'video': forms.FileInput(attrs={'class': 'form-control'}), 
+      }
+    labels = {'title': "Título", 'details': "Detalhes", 'video': "Video" }

@@ -20,6 +20,27 @@ urlpatterns = [
    path('list_product', views.list_product, name="list_product"),
    path('delete_product/<int:pk>', views.delete_product, name="delete_product"),
 
+   path('add_ingredients', views.add_ingredients, name="add_ingredients"),
+   path('edit_ingredients/<int:pk>', views.edit_ingredients, name="edit_ingredients"),
+   path('list_ingredients', views.list_ingredients, name="list_ingredients"),
+   path('delete_ingredients/<int:pk>', views.delete_ingredients, name="delete_ingredients"),
+
+   path('add_case', views.add_case, name="add_case"),
+   path('edit_case/<int:pk>', views.edit_case, name="edit_case"),
+   path('list_case', views.list_case, name="list_case"),
+   path('delete_case/<int:pk>', views.delete_case, name="delete_case"),
+
+   path('add_how', views.add_how, name="add_how"),
+   path('edit_how/<int:pk>', views.edit_how, name="edit_how"),
+   path('list_how', views.list_how, name="list_how"),
+   path('delete_how/<int:pk>', views.delete_how, name="delete_how"),
+
+   path('edit_initial', views.edit_initial, name="edit_initial"),
+
+   path('edit_how_text', views.edit_how_text, name="edit_how_text"),
+
+   path('edit_video_description', views.edit_video_description, name='edit_video_description'),
+
    path('login', views.do_login, name="login"),
    path('logout', views.do_logout, name="logout"),
 

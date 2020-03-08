@@ -25,3 +25,31 @@ class Contact(models.Model):
 
 	def __str__(self):
 		return self.name
+
+
+
+class Initial(models.Model):
+	title = models.TextField()
+	subtitle = models.TextField()
+
+	def __str__(self):
+		return self.title
+
+class How_Use(models.Model):
+	title = models.CharField(max_length=500, null=True)
+	details = models.TextField()
+	image = models.ImageField(upload_to='image/how_use')
+
+	def __str__(self):
+		return self.title
+
+class How_Use_Text(models.Model):
+	title = models.CharField(max_length=500)
+	subtitle = models.CharField(max_length=500)
+	details = models.TextField()
+
+class Video_Description(models.Model):
+	title = models.CharField(max_length=500, null=True)
+	details = models.TextField()
+	video = models.FileField(upload_to='video')
+

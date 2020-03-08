@@ -3,7 +3,12 @@
 
 {% block conteudo %}
 <div class="content">
-	<div class="row">
+	<div class="container">
+		{% if clients.all %}	
+		<div align="center">
+			<a href="{% url 'add_client' %}" class="btn btn-success">ADICIONAR</a>
+		</div>
+		{% endif %}
 		{% for client in clients %}
 		<div class="col-8">
 			<ul>
@@ -13,6 +18,8 @@
 			<a href="{% url 'edit_client' client.pk %}" class="btn btn-primary">EDITAR</a>
 			<a href="{% url 'delete_client' client.pk %}" class="btn btn-danger">APAGAR</a>
 		</div>
+		{% empty %}
+		<a href="{% url 'add_client' %}" class="btn btn-success">ADICIONAR</a>
 		{% endfor %}
 	</div>
 </div>	

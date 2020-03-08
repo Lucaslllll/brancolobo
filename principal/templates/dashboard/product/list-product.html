@@ -3,15 +3,30 @@
 
 {% block conteudo %}
 <div class="content">
-	<div class="row">
+	<div class="container">
+		{% if products.all %}
+		<div align="center">
+			<a href="{% url 'add_product' %}" class="btn btn-success">ADICIONAR</a>
+		</div>
+		{% endblock %}
 		{% for product in products %}
 		<div class="col-8">
 			<ul>
 				<li>{{product.name}}</li>
 				<li>{{product.details}}</li>
+				<ul>
+				{% for ingredient in product.ingredients.all %}
+					<li>{{ingredient}}</li>
+				{% endfor %}
+				</ul>
+
 			</ul>
 			<a href="{% url 'edit_product' product.pk %}" class="btn btn-primary">EDITAR</a>
 			<a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">APAGAR</a>
+		</div>
+		{% empty %}
+		<div align="center">
+		<a href="{% url 'add_product' %}" class="btn btn-success">ADICIONAR</a>
 		</div>
 		{% endfor %}
 	</div>

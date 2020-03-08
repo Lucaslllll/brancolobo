@@ -16,7 +16,7 @@ class Description(models.Model):
 
 class PhotoProdutoAfterBefore(models.Model):
 	name = models.CharField(max_length=255)
-	photo = models.ImageField()
+	photo = models.ImageField(upload_to='case', null=True)
 
 	def __str__(self):
 		return self.name

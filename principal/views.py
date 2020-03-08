@@ -5,9 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 
-from inicial.models import Doubt, Client
-from .models import Product
-from .forms import DoubtForm, ClientForm, ProductForm
+from inicial.models import Doubt, Client, PhotoProdutoAfterBefore
+from .models import Product, Ingredients, Contact, Initial, How_Use, Video_Description, How_Use_Text
+from .forms import DoubtForm, ClientForm, ProductForm, IngredientsForm, CaseForm, VideoDescriptionForm
+from .forms import InitialForm, HowUseForm, HowUseTextForm
 
 from django.core.mail import send_mail
 from django.core import mail
@@ -58,7 +59,7 @@ def forget_password(request):
       user = User.objects.get(email=request.POST['email'])  
     except User.DoesNotExist:
       user = None
-    print(request.POST['email'])
+    
     if user != None:
       msg_html = render_to_string('dashboard/email.html', {
         'user': user,
@@ -119,8 +120,7 @@ def change_password(request):
       if user != None:
         user.set_password(password1)
         user.save()
-        # auth = Auth_User.objects.get(user=user)
-        # auth.delete()
+
         return redirect('login')
       else:
         return HttpResponse("<h1 align='center'>Please, use the link of your email</h1>")        
@@ -142,7 +142,7 @@ def add_doubt(request):
       form.save()
       return redirect('list_doubt')
     else:
-      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_doubt'>click here</a>")
+      HttpResponse(json.dumps(form.errors))
   else:
     form = DoubtForm()
   data['form'] = form
@@ -166,7 +166,7 @@ def edit_doubt(request, pk):
       return redirect('index')
     else:
       
-      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_doubt'>click here</a>")
+      HttpResponse(json.dumps(form.errors))
   else:
     form = DoubtForm(instance=doubt)
 
@@ -190,7 +190,7 @@ def add_client(request):
       form.save()
       return redirect('list_client')
     else:
-      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_client'>click here</a>")
+      HttpResponse(json.dumps(form.errors))
   else:
     form = ClientForm()
   data['form'] = form
@@ -215,7 +215,7 @@ def edit_client(request, pk):
       return redirect('index')
     else:
       
-      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_client'>click here</a>")
+      HttpResponse(json.dumps(form.errors))
   else:
     form = ClientForm(instance=client)
 
@@ -229,19 +229,19 @@ def delete_client(request, pk):
   return redirect('index')
 
 
-# crud client
+# crud product
 
 def add_product(request):
   data = {}
   if request.method == 'POST':
-    form = ProductForm(data=request.POST, files=request.FILES)
+    form = IngredientsForm(data=request.POST, files=request.FILES)
     if form.is_valid():
       form.save()
       return redirect('list_product')
     else:
       HttpResponse(json.dumps(form.errors))
   else:
-    form = ProductForm()
+    form = IngredientsForm()
   data['form'] = form
 
   return render(request, 'dashboard/product/add-product.html', data)
@@ -264,7 +264,7 @@ def edit_product(request, pk):
       return redirect('index')
     else:
       
-      return HttpResponse("<h1 align='center'>Complete the fields</h1></br></br><a align='center' href='add_doubt'>click here</a>")
+      HttpResponse(json.dumps(form.errors))
   else:
     form = ProductForm(instance=product)
 
@@ -276,3 +276,213 @@ def delete_product(request, pk):
   product = Product.objects.get(pk=pk)
   product.delete()
   return redirect('index')
+
+
+# crud ingredient
+
+def add_ingredients(request):
+  data = {}
+  if request.method == 'POST':
+    form = IngredientsForm(data=request.POST, files=request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('list_ingredients')
+    else:
+      HttpResponse(json.dumps(form.errors))
+  else:
+    form = IngredientsForm()
+  data['form'] = form
+
+  return render(request, 'dashboard/ingredient/add-ingredient.html', data)
+
+def list_ingredients(request):
+  data = {}
+  ingredients = Ingredients.objects.all()
+  data['ingredients'] = ingredients
+  return render(request, 'dashboard/ingredient/list-ingredient.html', data)
+
+def edit_ingredients(request, pk):
+  data = {}
+  ingredient = Ingredients.objects.get(pk=pk)
+  
+  if request.method == 'POST':
+    form = IngredientsForm(data=request.POST, instance=ingredient)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+    else:
+      
+      HttpResponse(json.dumps(form.errors))
+  else:
+    form = IngredientsForm(instance=ingredient)
+
+  data['form'] = form; data['ingredient'] = ingredient;
+
+  return render(request, 'dashboard/ingredient/edit-ingredient.html', data)
+
+def delete_ingredients(request, pk):
+  ingredient = Ingredients.objects.get(pk=pk)
+  ingredient.delete()
+  return redirect('index')
+
+
+# crud cases
+
+def add_case(request):
+  data = {}
+  if request.method == 'POST':
+    form = CaseForm(data=request.POST, files=request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('list_case')
+    else:
+      HttpResponse(json.dumps(form.errors))
+  else:
+    form = CaseForm()
+  data['form'] = form
+
+  return render(request, 'dashboard/case/add-case.html', data)
+
+def list_case(request):
+  data = {}
+  cases = PhotoProdutoAfterBefore.objects.all()
+  data['cases'] = cases
+  return render(request, 'dashboard/case/list-case.html', data)
+
+def edit_case(request, pk):
+  data = {}
+  case = PhotoProdutoAfterBefore.objects.get(pk=pk)
+  
+  if request.method == 'POST':
+    case.photo.delete()
+    form = CaseForm(data=request.POST, files=request.FILES, instance=case)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+    else:
+      
+     HttpResponse(json.dumps(form.errors))
+  else:
+    form = CaseForm(instance=case)
+
+  data['form'] = form; data['case'] = case;
+
+  return render(request, 'dashboard/case/edit-case.html', data)
+
+def delete_case(request, pk):
+  case = PhotoProdutoAfterBefore.objects.get(pk=pk)
+  case.delete()
+  return redirect('index')
+
+
+# crud initial
+
+def edit_initial(request):
+  data = {}
+  initial = Initial.objects.get(pk=1)
+  
+  if request.method == 'POST':
+    form = InitialForm(data=request.POST, instance=initial)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+    else:
+      
+     HttpResponse(json.dumps(form.errors))
+  else:
+    form = InitialForm(instance=initial)
+
+  data['form'] = form; data['initial'] = initial;
+
+  return render(request, 'dashboard/initial/edit-initial.html', data)
+
+# crud How Use
+
+def add_how(request):
+  data = {}
+  if request.method == 'POST':
+    form = HowUseForm(data=request.POST, files=request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('list_how')
+    else:
+      HttpResponse(json.dumps(form.errors))
+  else:
+    form = HowUseForm()
+  data['form'] = form
+
+  return render(request, 'dashboard/how/add-how.html', data)
+
+def list_how(request):
+  data = {}
+  hows = How_Use.objects.all()
+  data['hows'] = hows
+  return render(request, 'dashboard/how/list-how.html', data)
+
+def edit_how(request, pk):
+  data = {}
+  how = How_Use.objects.get(pk=pk)
+  
+  if request.method == 'POST':
+    how.image.delete()
+    form = HowUseForm(data=request.POST, files=request.FILES, instance=how)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+    else:
+      
+     HttpResponse(json.dumps(form.errors))
+  else:
+    form = HowUseForm(instance=how)
+
+  data['form'] = form; data['how'] = how;
+
+  return render(request, 'dashboard/how/edit-how.html', data)
+
+def delete_how(request, pk):
+  how = How_Use.objects.get(pk=pk)
+  how.delete()
+  return redirect('index')
+
+# crud how text
+
+def edit_how_text(request):
+  data = {}
+  how = How_Use_Text.objects.get(pk=1)
+  
+  if request.method == 'POST':
+    form = HowUseTextForm(data=request.POST, instance=how)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+    else:
+      
+     HttpResponse(json.dumps(form.errors))
+  else:
+    form = HowUseTextForm(instance=how)
+
+  data['form'] = form; data['how'] = how;
+
+  return render(request, 'dashboard/how_text/edit-how-text.html', data)
+
+
+# crud how text
+
+def edit_video_description(request):
+  data = {}
+  video = Video_Description.objects.get(pk=1)
+  
+  if request.method == 'POST':
+    form = VideoDescriptionForm(data=request.POST, instance=video)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+    else:
+      
+     HttpResponse(json.dumps(form.errors))
+  else:
+    form = HowUseTextForm(instance=how)
+
+  data['form'] = form; data['how'] = how;
+
+  return render(request, 'dashboard/how_text/edit-how-text.html', data)
