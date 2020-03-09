@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 
 from inicial.models import Doubt, Client, PhotoProdutoAfterBefore
-from .models import Product, Ingredients, Contact, Initial, How_Use, Video_Description, How_Use_Text
+from .models import Product, Ingredients, Contact, Initial, How_Use, Video_Description, How_Use_Text, TecDashImages
 from .forms import DoubtForm, ClientForm, ProductForm, IngredientsForm, CaseForm, VideoDescriptionForm
 from .forms import InitialForm, HowUseForm, HowUseTextForm
 
@@ -19,7 +19,13 @@ import json
 
 @login_required(login_url='login')
 def index(request):
-  return render(request, 'dashboard/dashboard.html')
+  option = TecDashImages.objects.all()
+
+  context = {
+    'option': option
+  }
+
+  return render(request, 'dashboard/dashboard.html', context)
 
 def verifify_user(email, password):
   try:
@@ -177,7 +183,7 @@ def edit_doubt(request, pk):
 def delete_doubt(request, pk):
   doubt = Doubt.objects.get(pk=pk)
   doubt.delete()
-  return redirect('index')
+  return redirect('list_doubt')
 
 
 # crud client

@@ -67,3 +67,8 @@ div#footer{
 	border: 1px solid #EEE;
 	border-radius: 5px;
 }
+
+
+.content{
+	min-height: 77vh;
+}

@@ -53,3 +53,11 @@ class Video_Description(models.Model):
 	details = models.TextField()
 	video = models.FileField(upload_to='video')
 
+class TecDashImages(models.Model):
+	title = models.CharField(max_length=500, null=True)
+	slug = models.CharField(max_length=100, null=True)
+	details = models.TextField()
+	image = models.ImageField(upload_to='image/how_use')
+
+	def __str__(self):
+		return self.title

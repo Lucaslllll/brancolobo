@@ -4,139 +4,21 @@
 	<div class="mt-2">
 		<div class="container">
 			<div class="row d-flex justify-content-center">
-				<!-- <div class="col-12 col-lg-4">
-					<a href="#">
-						<div class="option-edit">
-							<div class="bg-option">
-							 	<h2>Menu</h2>
-							 	<p>
-							 		Altere as opções do Menu
-							 	</p>
-							</div>
-						</div>
-					</a>
-				</div> -->
+				{% for opt in option %}
 				<div class="col-12 col-lg-4">
-					<a href="{% url 'edit_initial' %}">
+					<a href="{{ opt.slug }}">
 						<!-- Cada opção terá o print do setor -->
-						<div class="option-edit">
+						<div style="background-image: url({{ opt.image.url }});" class="option-edit">
 							<div class="bg-option">
-							 	<h2>Cabeçalho</h2>
+							 	<h2>{{ opt.title }}</h2>
 							 	<p>
-							 		Altere a descrição que aparece no inicio
+							 		{{ opt.details }}
 							 	</p>
 							 </div>
 						</div>
 					</a>
 				</div>
-				<div class="col-12 col-lg-4">
-					<a href="{% url 'edit_video_description' %}">
-						<div class="option-edit">
-							<div class="bg-option">
-							 	<h2>EFICÁCIA E SEGURANÇA</h2>
-							 	<p>
-							 		Altere as primeiras informações e o vídeo
-							 	</p>
-							 </div>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-lg-4">
-					<a href="{% url 'list_client' %}">
-						<div class="option-edit">
-							<div class="bg-option">
-						 		<h2>NOSSOS CLIENTES ESTÃO SATISFEITOS?</h2>
-							 	<p>
-							 		Altere as informações do cliente
-							 	</p>
-							 </div>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-lg-4">
-					<a href="{% url 'list_case' %}">
-						<div class="option-edit">
-							<div class="bg-option">
-							 	<h2>Imagens de casos reais</h2>
-							 	<p>
-							 		Altere as imagens
-							 	</p>
-							 </div>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-lg-4">
-					<a href="{% url 'list_ingredients' %}">
-						<div class="option-edit">
-							<div class="bg-option">
-							 	<h2>INGREDIENTES QUE VOCÊ ENTENDE</h2>
-							 	<p>
-							 		Altere as informações dos ingredientes
-							 	</p>
-							 </div>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-lg-4">
-					<a href="{% url 'list_how' %}">
-						<div class="option-edit">
-							<div class="bg-option">
-							 	<h2>Passo a Passo</h2>
-							 	<p>
-							 		Altere as informações do passo a passo do produto
-							 	</p>
-							 </div>
-						</div>
-					</a>
-				</div>
-        <div class="col-12 col-lg-4">
-          <a href="{% url 'edit_how_text' %}">
-            <div class="option-edit">
-              <div class="bg-option">
-                <h2>COMO USAR</h2>
-                <p>
-                  Altere das instruções do produto
-                </p>
-              </div>
-            </div>
-          </a>
-        </div>
-				<div class="col-12 col-lg-4">
-					<a href="{% url 'list_product' %}">
-						<div class="option-edit">
-							<div class="bg-option">
-							 	<h2>Produtos</h2>
-							 	<p>
-							 		Altere os produtos
-							 	</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-lg-4">
-					<a href="{% url 'list_doubt' %}">
-						<div class="option-edit">
-							<div class="bg-option">
-							 	<h2>Dúvidas</h2>
-							 	<p>
-							 		Coloque as principais dúvidas
-							 	</p>
-							 </div>
-						</div>
-					</a>
-				</div>
-			<!-- 	<div class="col-12 col-lg-4">
-					<a href="#">
-						<div class="option-edit">
-							<div class="bg-option">
-							 	<h2>Rodapé</h2>
-							 	<p>
-							 		Coloque informações como o seu nome, CNPJ e link para as suas redes sociais.
-							 	</p>	
-							 </div>
-						</div>
-					</a>
-				</div> -->
+				{% endfor %}
 			</div>
 		</div>
 	</div>
