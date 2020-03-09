@@ -347,7 +347,7 @@ def add_case(request):
     form = CaseForm()
   data['form'] = form
 
-  return render(request, 'dashboard/case/add-case.html', data)
+  return render(request, 'dashboard/case/add_case.html', data)
 
 def list_case(request):
   data = {}
