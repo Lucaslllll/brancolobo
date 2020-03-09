@@ -51,9 +51,9 @@ def do_login(request):
       return redirect('index')
     else:
       error = True
-      return render(request, 'dashboard/login.html', {'error': error})
+      return render(request, 'dashboard/telaLogin.html', {'error': error})
 
-  return render(request, 'dashboard/login.html')
+  return render(request, 'dashboard/telaLogin.html')
 
 def do_logout(request):
   logout(request)
