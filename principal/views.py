@@ -473,7 +473,8 @@ def edit_video_description(request):
   video = Video_Description.objects.get(pk=1)
   
   if request.method == 'POST':
-    form = VideoDescriptionForm(data=request.POST, instance=video)
+    form = VideoDescriptionForm(data=request.POST, files=request.FILES, instance=video)
+    video.video.delete()
     if form.is_valid():
       form.save()
       return redirect('index')
@@ -481,8 +482,8 @@ def edit_video_description(request):
       
      HttpResponse(json.dumps(form.errors))
   else:
-    form = HowUseTextForm(instance=how)
+    form = VideoDescriptionForm(instance=video)
 
-  data['form'] = form; data['how'] = how;
+  data['form'] = form; data['video'] = video;
 
-  return render(request, 'dashboard/how_text/edit-how-text.html', data)
+  return render(request, 'dashboard/video_description/edit-video-description.html', data)

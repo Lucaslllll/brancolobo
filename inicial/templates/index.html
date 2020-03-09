@@ -70,17 +70,15 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-lg-6">
-          <video src="video/video.mp4" controls class="yt-video" ></video>
+          <video src="{{video.video.url}}" controls class="yt-video" type="video/mp4" ></video>
         </div>
         <div class="col-12 col-lg-6">
           <div class="desc-start-info">
             <h3>
-              Eficácia e Segurança
+              {{video.title}}
             </h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem natus aliquid molestiae nam totam
-              odit blanditiis est? Minima fugiat maxime quas aliquid quaerat consequatur explicabo nulla ipsum quos, ad
-              ut?
+              {{video.details}}
             </p>
           </div>
         </div>
@@ -192,9 +190,11 @@
         <div class="col-12">
           <div class="ingre-info">
             <h2>Ingredientes Que Você Entende</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt praesentium dicta quam, vel inventore
-              quis officiis maiores molestias est provident, ad quos maxime officia repellendus nam asperiores
-              necessitatibus dolor dolore.</p>
+            <p>
+              {% for ingredient in ingredients %}
+                {{ingredient}}; 
+              {% endfor %}
+            </p>
           </div>
         </div>
 
@@ -224,17 +224,15 @@
         <div class="col-12 col-lg-6">
           <div class="uso-info">
             <h3>
-              Como Usar
+              {{how_text.title}}
             </h3>
             <p>
               <span class="font-negr">
-                Lorem ipsum dolor sit.
+                {{how_text.subtitle}}
               </span>
             </p>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam similique, nihil perferendis
-              exercitationem tenetur voluptates velit, animi veniam dolorum a, iste nulla cum repellat quia hic facilis
-              accusantium in maxime?
+              {{how_text.details}}
             </p>
             <div class="pt-4 pb-4">
               <a href="#" class="btn-cto btn-techay">COMPRE O SEU</a>
@@ -244,30 +242,14 @@
         <div class="col-12 col-lg-6">
           <div class="container-info-passo">
             <div class="row">
+              {% for how in hows %}
               <div class="col-12 col-lg-6">
                 <div class="uso-info-passo">
-                  <img src="{% static 'img/passo1-1.png' %}" />
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                  <img src="{{how.image.url}}" />
+                  <p>{{how.details}}</p>
                 </div>
               </div>
-              <div class="col-12 col-lg-6">
-                <div class="uso-info-passo">
-                  <img src="{% static 'img/passo2.png' %}" />
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                </div>
-              </div>
-              <div class="col-12 col-lg-6">
-                <div class="uso-info-passo">
-                  <img src="{% static 'img/passo3.png' %}" />
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                </div>
-              </div>
-              <div class="col-12 col-lg-6">
-                <div class="uso-info-passo">
-                  <img src="{% static 'img/Ativo-7.png' %}" />
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                </div>
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>

@@ -8,12 +8,13 @@
 		<div align="center">
 			<a href="{% url 'add_product' %}" class="btn btn-success">ADICIONAR</a>
 		</div>
-		{% endblock %}
+		{% endif %}
 		{% for product in products %}
 		<div class="col-8">
 			<ul>
 				<li>{{product.name}}</li>
 				<li>{{product.details}}</li>
+				<img width="200" src="{{product.image.url}}">
 				<ul>
 				{% for ingredient in product.ingredients.all %}
 					<li>{{ingredient}}</li>
