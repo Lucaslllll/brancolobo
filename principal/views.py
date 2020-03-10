@@ -139,7 +139,7 @@ def change_password(request):
   return render(request, 'dashboard/change-password.html', {'error':error})
 
 # client doubt
-
+@login_required(login_url='login')
 def add_doubt(request):
   data = {}
   if request.method == 'POST':
@@ -154,12 +154,14 @@ def add_doubt(request):
   data['form'] = form
   return render(request, 'dashboard/doubt/add-doubt.html', data)
 
+@login_required(login_url='login')
 def list_doubt(request):
   data = {}
   doubts = Doubt.objects.all()
   data['doubts'] = doubts
   return render(request, 'dashboard/doubt/list-doubt.html', data)
 
+@login_required(login_url='login')
 def edit_doubt(request, pk):
   data = {}
   doubt = Doubt.objects.get(pk=pk)
@@ -180,6 +182,7 @@ def edit_doubt(request, pk):
 
   return render(request, 'dashboard/doubt/edit-doubt.html', data)
 
+@login_required(login_url='login')
 def delete_doubt(request, pk):
   doubt = Doubt.objects.get(pk=pk)
   doubt.delete()
@@ -187,7 +190,7 @@ def delete_doubt(request, pk):
 
 
 # crud client
-
+@login_required(login_url='login')
 def add_client(request):
   data = {}
   if request.method == 'POST':
@@ -203,12 +206,14 @@ def add_client(request):
 
   return render(request, 'dashboard/client/add-client.html', data)
 
+@login_required(login_url='login')
 def list_client(request):
   data = {}
   clients = Client.objects.all()
   data['clients'] = clients
   return render(request, 'dashboard/client/list-client.html', data)
 
+@login_required(login_url='login')
 def edit_client(request, pk):
   data = {}
   client = Client.objects.get(pk=pk)
@@ -229,6 +234,7 @@ def edit_client(request, pk):
 
   return render(request, 'dashboard/client/edit-client.html', data)
 
+@login_required(login_url='login')
 def delete_client(request, pk):
   client = Client.objects.get(pk=pk)
   client.delete()
@@ -236,28 +242,30 @@ def delete_client(request, pk):
 
 
 # crud product
-
+@login_required(login_url='login')
 def add_product(request):
   data = {}
   if request.method == 'POST':
-    form = IngredientsForm(data=request.POST, files=request.FILES)
+    form = ProductForm(data=request.POST, files=request.FILES)
     if form.is_valid():
       form.save()
       return redirect('list_product')
     else:
       HttpResponse(json.dumps(form.errors))
   else:
-    form = IngredientsForm()
+    form = ProductForm()
   data['form'] = form
 
   return render(request, 'dashboard/product/add-product.html', data)
 
+@login_required(login_url='login')
 def list_product(request):
   data = {}
   products = Product.objects.all()
   data['products'] = products
   return render(request, 'dashboard/product/list-product.html', data)
 
+@login_required(login_url='login')
 def edit_product(request, pk):
   data = {}
   product = Product.objects.get(pk=pk)
@@ -278,6 +286,7 @@ def edit_product(request, pk):
 
   return render(request, 'dashboard/product/edit-product.html', data)
 
+@login_required(login_url='login')
 def delete_product(request, pk):
   product = Product.objects.get(pk=pk)
   product.delete()
@@ -285,7 +294,7 @@ def delete_product(request, pk):
 
 
 # crud ingredient
-
+@login_required(login_url='login')
 def add_ingredients(request):
   data = {}
   if request.method == 'POST':
@@ -301,12 +310,14 @@ def add_ingredients(request):
 
   return render(request, 'dashboard/ingredient/add-ingredient.html', data)
 
+@login_required(login_url='login')
 def list_ingredients(request):
   data = {}
   ingredients = Ingredients.objects.all()
   data['ingredients'] = ingredients
   return render(request, 'dashboard/ingredient/list-ingredient.html', data)
 
+@login_required(login_url='login')
 def edit_ingredients(request, pk):
   data = {}
   ingredient = Ingredients.objects.get(pk=pk)
@@ -326,6 +337,7 @@ def edit_ingredients(request, pk):
 
   return render(request, 'dashboard/ingredient/edit-ingredient.html', data)
 
+@login_required(login_url='login')
 def delete_ingredients(request, pk):
   ingredient = Ingredients.objects.get(pk=pk)
   ingredient.delete()
@@ -333,7 +345,7 @@ def delete_ingredients(request, pk):
 
 
 # crud cases
-
+@login_required(login_url='login')
 def add_case(request):
   data = {}
   if request.method == 'POST':
@@ -349,25 +361,28 @@ def add_case(request):
 
   return render(request, 'dashboard/case/add_case.html', data)
 
+@login_required(login_url='login')
 def list_case(request):
   data = {}
   cases = PhotoProdutoAfterBefore.objects.all()
   data['cases'] = cases
   return render(request, 'dashboard/case/list-case.html', data)
 
+@login_required(login_url='login')
 def edit_case(request, pk):
   data = {}
   case = PhotoProdutoAfterBefore.objects.get(pk=pk)
   
   if request.method == 'POST':
     case.photo.delete()
+    
     form = CaseForm(data=request.POST, files=request.FILES, instance=case)
     if form.is_valid():
       form.save()
       return redirect('index')
     else:
       
-     HttpResponse(json.dumps(form.errors))
+      HttpResponse(json.dumps(form.errors))
   else:
     form = CaseForm(instance=case)
 
@@ -375,6 +390,7 @@ def edit_case(request, pk):
 
   return render(request, 'dashboard/case/edit-case.html', data)
 
+@login_required(login_url='login')
 def delete_case(request, pk):
   case = PhotoProdutoAfterBefore.objects.get(pk=pk)
   case.delete()
@@ -382,7 +398,7 @@ def delete_case(request, pk):
 
 
 # crud initial
-
+@login_required(login_url='login')
 def edit_initial(request):
   data = {}
   initial = Initial.objects.get(pk=1)
@@ -403,7 +419,7 @@ def edit_initial(request):
   return render(request, 'dashboard/initial/edit-initial.html', data)
 
 # crud How Use
-
+@login_required(login_url='login')
 def add_how(request):
   data = {}
   if request.method == 'POST':
@@ -419,12 +435,14 @@ def add_how(request):
 
   return render(request, 'dashboard/how/add-how.html', data)
 
+@login_required(login_url='login')
 def list_how(request):
   data = {}
   hows = How_Use.objects.all()
   data['hows'] = hows
   return render(request, 'dashboard/how/list-how.html', data)
 
+@login_required(login_url='login')
 def edit_how(request, pk):
   data = {}
   how = How_Use.objects.get(pk=pk)
@@ -445,13 +463,14 @@ def edit_how(request, pk):
 
   return render(request, 'dashboard/how/edit-how.html', data)
 
+@login_required(login_url='login')
 def delete_how(request, pk):
   how = How_Use.objects.get(pk=pk)
   how.delete()
   return redirect('index')
 
 # crud how text
-
+@login_required(login_url='login')
 def edit_how_text(request):
   data = {}
   how = How_Use_Text.objects.get(pk=1)
@@ -473,7 +492,7 @@ def edit_how_text(request):
 
 
 # crud how text
-
+@login_required(login_url='login')
 def edit_video_description(request):
   data = {}
   video = Video_Description.objects.get(pk=1)
