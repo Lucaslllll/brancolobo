@@ -512,3 +512,13 @@ def edit_video_description(request):
   data['form'] = form; data['video'] = video;
 
   return render(request, 'dashboard/video_description/edit-video-description.html', data)
+
+
+def add_product_prize(request):
+  return render(request, 'dashboard/product_prize/add_product_prize.html')
+
+def list_product_prize(request):
+  return render(request, 'dashboard/product_prize/list_product_prize.html')
+
+def edit_product_prize(request):
+  return render(request, 'dashboard/product_prize/edit_product_prize.html')

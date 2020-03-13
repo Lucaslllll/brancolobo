@@ -47,4 +47,9 @@ urlpatterns = [
    path('forget_password', views.forget_password, name='forget_password'),
    path('confirme_password/<int:pk>/<str:token>', views.confirme_password, name='confirme_password'),
    path('change_password', views.change_password, name='change_password'),
+
+   path('add_product_prize', views.add_product_prize, name="add_product_prize"),
+   path('edit_product_prize', views.edit_product_prize, name="edit_product_prize"),
+   path('list_product_prize', views.list_product_prize, name="list_product_prize")
+
 ]

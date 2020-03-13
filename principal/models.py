@@ -62,3 +62,10 @@ class TecDashImages(models.Model):
 	def __str__(self):
 		return self.title
 		
+class ProductsPrize(models.Model):
+	qnt = models.CharField(max_length=100, null=True)
+	image = models.ImageField(upload_to="image/products_img")
+	preco_one = models.CharField(max_length=60, null=True)
+	por_div = models.CharField(max_length=60, null=True)
+	prize_div = models.CharField(max_length=80, null=True)
+	buy_link = models.CharField(max_length=100, null=True)

@@ -1,6 +1,6 @@
 from django import forms
 from inicial.models import Doubt, Client, PhotoProdutoAfterBefore
-from .models import Product, Ingredients, Contact, Initial, How_Use, How_Use_Text, Video_Description
+from .models import Product, Ingredients, Contact, Initial, How_Use, How_Use_Text, Video_Description, ProductsPrize
 
 
 class DoubtForm(forms.ModelForm):
@@ -104,5 +104,13 @@ class VideoDescriptionForm(forms.ModelForm):
       'title': forms.TextInput(attrs={'class':'form-control'}),
       'details': forms.Textarea(attrs={'class':'form-control'}),
       'video': forms.FileInput(attrs={'class': 'form-control'}), 
+      }
+    labels = {'title': "Título", 'details': "Detalhes", 'video': "Video" }
+
+class ProductPrize(forms.ModelForm):
+  class Meta:
+    model = ProductPrize
+    fields = '__all__'
+    widgets = {
       }
     labels = {'title': "Título", 'details': "Detalhes", 'video': "Video" }

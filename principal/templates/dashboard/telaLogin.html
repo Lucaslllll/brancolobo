@@ -14,22 +14,20 @@
 
         <div id="form_login">
             <div id="content">
-                {% comment %} {% if error == True %} {% endcomment %}
+                <div class="pb-3">
+                    <h6 class="text-center text-dark border-bottom border-dark p-3 font-weight-bold">ENTRAR</h6>                </div>
+                {% if error == True %}
                 <div class="pb-3">
                     <h4 class="text-center text-danger rounded border border-danger p-3 font-weight-bold">Wrong email or password!</h4>
                 </div>
-                {% comment %} {% endif %} {% endcomment %}
+                {% endif %}
                 <form method="post">
                     {% csrf_token %}
-                    <div class="input-group">
-                        <span class="field-icon">
-                            <i class="fas fa-user"></i>
-                        </span>
+                    <div class="input-group mb-2">
                         <input type="email" name="email" placeholder="Digite seu e-mail..." required autofocus>
                     </div>
-                    
+
                     <div class="input-group">
-                        <span class="field-icon"><i class="fas fa-lock"></i></span>
                         <input type="password" name="password" placeholder="Digite sua senha..." required>
                     </div>
                    
