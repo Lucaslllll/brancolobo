@@ -69,3 +69,6 @@ class ProductsPrize(models.Model):
 	por_div = models.CharField(max_length=60, null=True)
 	prize_div = models.CharField(max_length=80, null=True)
 	buy_link = models.CharField(max_length=100, null=True)
+
+	def __str__(self):
+		return self.preco_one

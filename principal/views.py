@@ -7,8 +7,9 @@ from django.contrib.auth import login, authenticate, logout
 
 from inicial.models import Doubt, Client, PhotoProdutoAfterBefore
 from .models import Product, Ingredients, Contact, Initial, How_Use, Video_Description, How_Use_Text, TecDashImages
+from .models import ProductsPrize
 from .forms import DoubtForm, ClientForm, ProductForm, IngredientsForm, CaseForm, VideoDescriptionForm
-from .forms import InitialForm, HowUseForm, HowUseTextForm
+from .forms import InitialForm, HowUseForm, HowUseTextForm, ProductPrizeForm
 
 from django.core.mail import send_mail
 from django.core import mail
@@ -514,11 +515,55 @@ def edit_video_description(request):
   return render(request, 'dashboard/video_description/edit-video-description.html', data)
 
 
+# crud product prize
+@login_required(login_url='login')
 def add_product_prize(request):
-  return render(request, 'dashboard/product_prize/add_product_prize.html')
+  data = {}
+  if request.method == 'POST':
+    form = ProductPrizeForm(data=request.POST, files=request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('list_product_prize')
+    else:
+      HttpResponse(json.dumps(form.errors))
+  else:
+    form = ProductPrizeForm()
+  data['form'] = form
 
+  return render(request, 'dashboard/product_prize/add_product_prize.html', data)
+
+@login_required(login_url='login')
 def list_product_prize(request):
-  return render(request, 'dashboard/product_prize/list_product_prize.html')
+  data = {}
+  product_prize = ProductsPrize.objects.all()
+  data['product_prize'] = product_prize
+  return render(request, 'dashboard/product_prize/list_product_prize.html', data)
 
-def edit_product_prize(request):
-  return render(request, 'dashboard/product_prize/edit_product_prize.html')
+@login_required(login_url='login')
+def edit_product_prize(request, pk):
+  data = {}
+  product_prize = ProductsPrize.objects.get(pk=pk)
+  
+  if request.method == 'POST':
+    form = ProductPrizeForm(data=request.POST, files=request.FILES, instance=product_prize)
+    product_prize.image.delete()
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+    else:
+      
+     HttpResponse(json.dumps(form.errors))
+  else:
+    form = ProductPrizeForm(instance=product_prize)
+
+  data['form'] = form; data['product_prize'] = product_prize;
+
+  return render(request, 'dashboard/product_prize/edit_product_prize.html', data)
+
+@login_required(login_url='login')
+def delete_product_prize(request, pk):
+  product_prize = ProductsPrize.objects.get(pk=pk)
+  product_prize.image.delete()
+  product_prize.delete()
+
+  return redirect('index')

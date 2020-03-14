@@ -107,10 +107,17 @@ class VideoDescriptionForm(forms.ModelForm):
       }
     labels = {'title': "Título", 'details': "Detalhes", 'video': "Video" }
 
-class ProductPrize(forms.ModelForm):
+class ProductPrizeForm(forms.ModelForm):
   class Meta:
-    model = ProductPrize
+    model = ProductsPrize
     fields = '__all__'
     widgets = {
+    	'qnt': forms.TextInput(attrs={'class':'form-control'}),
+    	'image': forms.FileInput(attrs={'class':'form-control'}),
+    	'preco_one': forms.TextInput(attrs={'class':'form-control'}),
+    	'por_div': forms.TextInput(attrs={'class':'form-control'}),
+      	'prize_div': forms.TextInput(attrs={'class':'form-control'}),
+      	'buy_link': forms.TextInput(attrs={'class':'form-control'}),
       }
-    labels = {'title': "Título", 'details': "Detalhes", 'video': "Video" }
+    labels = {'qnt': "Quantidade", 'image': "Imagem", 'preco_one': "Preço Único", 
+    		 'por_div': "Dividido por", 'prize_div': "Preço Dividido", 'buy_link': "Link da Compra"}

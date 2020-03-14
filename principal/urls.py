@@ -49,7 +49,8 @@ urlpatterns = [
    path('change_password', views.change_password, name='change_password'),
 
    path('add_product_prize', views.add_product_prize, name="add_product_prize"),
-   path('edit_product_prize', views.edit_product_prize, name="edit_product_prize"),
-   path('list_product_prize', views.list_product_prize, name="list_product_prize")
+   path('edit_product_prize/<int:pk>', views.edit_product_prize, name="edit_product_prize"),
+   path('list_product_prize', views.list_product_prize, name="list_product_prize"),
+   path('delete_product_prize/<int:pk>', views.delete_product_prize, name="delete_product_prize"),
 
 ]

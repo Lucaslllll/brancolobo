@@ -275,42 +275,21 @@
           </div>
         </div>
         <div class="row mt-4">
+          {% for product_prize in product_prizes %}
           <div class="col-12 col-lg-4 mt-4">
             <div class="buy-unid">
-              <h3>COMPRE 1 POTE</h3>
+              <h3>COMPRE {{product_prize.qnt}} POTE</h3>
               <div class="img-produto">
-                <img src="{% static 'img/produto.jpeg' %}" />
+                <img src="{{product_prize.image.url}}" />
               </div>
-              <p><span class="font-negr">R$ 97,00</span> ou</p>
-              <p>POR 3X DE</p>
-              <h2>R$ 32,34</h2>
-              <a href="#">COMPRAR AGORA</a>
+              <p><span class="font-negr">R$ {{product_prize.preco_one}}</span> ou</p>
+              <p>POR {{product_prize.por_div}} DE</p>
+              <h2>R$ {{product_prize.prize_div}}</h2>
+              <a href="{{product_prize.buy_link}}">COMPRAR AGORA</a>
             </div>
           </div>
-          <div class="col-12 col-lg-4 mt-4">
-            <div class="buy-unid">
-              <h3>COMPRE 2 POTE</h3>
-              <div class="img-produto">
-                <img src="{% static 'img/produto.jpeg' %}" />
-              </div>
-              <p><span class="font-negr">R$ 97,00</span> ou</p>
-              <p>POR 3X DE</p>
-              <h2>R$ 32,34</h2>
-              <a href="#">COMPRAR AGORA</a>
-            </div>
-          </div>
-          <div class="col-12 col-lg-4 mt-4">
-            <div class="buy-unid">
-              <h3>COMPRE 3 POTE</h3>
-              <div class="img-produto">
-                <img src="{% static 'img/produto.jpeg' %}" />
-              </div>
-              <p><span class="font-negr">R$ 97,00</span> ou</p>
-              <p>POR 3X DE</p>
-              <h2>R$ 32,34</h2>
-              <a href="#">COMPRAR AGORA</a>
-            </div>
-          </div>
+          {% endfor %}
+
         </div>
       </div>
     </div>
