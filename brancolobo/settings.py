@@ -25,7 +25,7 @@ SECRET_KEY = 'jj6o(vdw-hj#&u6uauhtcb&y=4o@^q%&by3%^g46t%(k)2f3e&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'principal',
-    'inicial',
+    'apps.principal',
+    'apps.inicial',
     
 ]
 
@@ -78,8 +78,15 @@ WSGI_APPLICATION = 'brancolobo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'brancolobo',
+        'USER': 'brancolobo',
+        'PASSWORD': 'techay1234',
+        'HOST': 'mysql.brancolobo.uni5.net',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
 
@@ -121,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static/'),
 ] 
 
 STATIC_URL = '/static/'
@@ -134,12 +141,21 @@ MEDIA_ROOT = (
 MEDIA_URL = '/media/'
 
 
+# reset for email
 EMAIL_FILE_PATH = '/tmp/app-messages'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = 'entrego.oficialdelivery@gmail.com'
-EMAIL_HOST_PASSWORD = 'delivery.1234'
-EMAIL_PORT = 587
+EMAIL_HOST = "smtpi.uni5.net"
+EMAIL_HOST_USER = 'igor@brancolobo.uni5.net'
+EMAIL_HOST_PASSWORD = 'cliente.1234'
+EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 PASSWORD_RESET_TIMEOUT_DAYS = 1
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# username no unique
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+USERNAME_FIELD = 'email'
